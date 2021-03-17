@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "experimentalDecorators":true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "types": [ "node", "express", "dotenv" ],
+        "target": "esnext",
+        "suppressImplicitAnyIndexErrors": true,
+        "allowJs": true,
+        "jsx": "react",
+        "alwaysStrict": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true
+    },
+    "exclude": [
+        "**/*.js",
+        "**/node_modules",
+        "**.d.ts"
+    ]
+}

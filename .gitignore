@@ -1,3 +1,7 @@
+#.js files transpilated by typescript
+*.js
+*.js.map
+
 # Logs
 logs
 *.log
