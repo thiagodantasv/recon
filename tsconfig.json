@@ -8,7 +8,7 @@
         "emitDecoratorMetadata": true,
         "moduleResolution": "node",
         "module": "commonjs",
-        "types": [ "node", "express", "dotenv" ],
+        "types": [ "node", "express", "dotenv", "mongodb" ],
         "target": "esnext",
         "suppressImplicitAnyIndexErrors": true,
         "allowJs": true,
