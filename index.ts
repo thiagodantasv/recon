@@ -2,6 +2,7 @@ import * as express from "express";
 import * as dotenv from "dotenv";
 import { Router } from "./routes/router";
 import * as projectInformation from "./package.json";
+import { Mongo } from "./classes/mongo"
 
 
 const projectVersion = projectInformation.version;
@@ -25,6 +26,8 @@ let startServer = async() => {
     if(!port){
         throw "No port configured for the server. You can solve this by inserting one enviroment variable called SERVER_PORT(And it MUST be a number)";
     }
+    const mongo = new Mongo();
+    mongo;
 
     const app = express();
     const router = new Router(app);
@@ -33,6 +36,7 @@ let startServer = async() => {
             console.log(`${controller} Controller have been initialized`);
         })
     });
+
     
     app.listen(port, () => {
         console.log(`Server listening in: ${port}`);
