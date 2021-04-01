@@ -5,8 +5,8 @@ import {
 
 export class Router{
     private app;
-    private _productController;
-    private _portalController;
+    private _productController: ProductController;
+    private _portalController: PortalController;
     private initializedControllers:string[];
     constructor(app){
         this.app = app;
@@ -32,6 +32,11 @@ export class Router{
         try{
             this.app.get("/getProducts", async (request, response) => {
                 response.send(await this._productController.getProducts());
+            });
+
+            this.app.post("/postProduct", async (request, response, next) => {
+                let result = await this._productController.postProduct(request.body);
+                // response.status(result.status).send(result);
             });
 
             this.initializedControllers.push("Product");
