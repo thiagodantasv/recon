@@ -1,10 +1,17 @@
+import { RequisitionStatus } from './interfaces/httpstatus';
 
 export default class Response<T>{
-    private data: T;
-    private error?: string;
-    public status: number;
+    public content:{
+        data: T
+    };
+    public status: RequisitionStatus;
 
-    constructor(status,data?,error?){
-        
+    constructor(status: RequisitionStatus,data?: T){
+        this.status = status;
+        this.content.data = data;
+    }
+
+    formatData(formatter: Function){
+        return formatter;
     }
 }
