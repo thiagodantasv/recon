@@ -15,6 +15,13 @@ export class Router{
         this.initializedControllers = [];
     }
 
+    private queryStringParser(url: string){
+        let urlParsed = url.split("?")[1].split("&");
+        let obj = {};
+        urlParsed.map((item) => obj[item.split("=")[0]] = item.split("=")[1]);
+        return obj;
+    }
+
     public initializeRoutes = async(): Promise<string[]> => {
         return new Promise(async (resolve, reject) => {
             try{
@@ -34,7 +41,14 @@ export class Router{
                 response.status(result.status).send(result.content);
             });
 
-            this.app.post("/postProduct", async (request, response, next) => {
+            this.app.get("/getProductById", async (request, response) => {
+                const url = request.url;
+                let queryStringParsed:any = this.queryStringParser(url);
+                let result = await this._productController.getProductById(queryStringParsed);
+                response.status(result.status).send(result.content);
+            })
+
+            this.app.post("/postProduct", async (request, response) => {
                 let result = await this._productController.postProduct(request.body);
                 response.status(result.status).send(result.content);
             });
