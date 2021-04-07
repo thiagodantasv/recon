@@ -5,6 +5,8 @@ export interface IPostProductRequest{
 }
 
 export interface IPostProductResponse{
-    insertedId: string;
-    insertedCount: number;
+    data:{
+        insertedId: string;
+        insertedCount: number;
+    }
 }

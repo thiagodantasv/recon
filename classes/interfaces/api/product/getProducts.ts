@@ -1,12 +1,14 @@
-import { ObjectID } from "mongodb";
+import { ObjectId } from "mongodb";
 
 export interface IGetProductsRequest{}
 
 export interface IGetProductsResponse{
-    productsList: Array<{
-        _id: ObjectID;
-        name: string;
-        price: number;
-        available: number;
-    }>
+    data:{
+        productsList: Array<{
+            _id: ObjectId;
+            name: string;
+            price: number;
+            available: number;
+        }>
+    }
 }

@@ -1,6 +1,6 @@
-import { ObjectID } from 'mongodb';
+import { ObjectId } from 'mongodb';
 export default interface IProducts{
-    _id: ObjectID;
+    _id: ObjectId;
     name: string;
     price: number;
     available: number;
