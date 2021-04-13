@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as dotenv from "dotenv";
+import * as cors from "cors";
 import { Router } from "./routes/router";
 import * as projectInformation from "./package.json";
 import { Mongo } from "./classes/mongo"
@@ -40,6 +41,7 @@ let startServer = async() => {
     
     const app = express();
     app.use(express.json());
+    app.use(cors());
     const router = new Router(app);
     await router.initializeRoutes().then((controllers) => {
         controllers.map((controller) => {
