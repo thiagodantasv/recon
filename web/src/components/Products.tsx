@@ -2,17 +2,18 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import { Card, CardContent, Paper, Typography } from '@material-ui/core';
 
-function App() {
+function Products() {
   const [products, setProducts] = useState<any[]>([]);
+  
   useEffect(() => {
     axios.get('http://localhost:5000/getProducts').then((response) => {
       setProducts(response.data.data.productsList);
-    });
+    });  
   }, []);
   
   const productCard = (name: string, price: string, availability: number) => {
     return(
-      <div style={{padding:5}}>
+      <div style={{padding:5, width:"30%"}}>
         <Card>
           <CardContent>
             <Typography component='h5' align='center' gutterBottom={true}>
@@ -34,9 +35,11 @@ function App() {
     <div className="App">
       <Paper elevation={3}>
         <header className="App-header">
-          <h1>Page header</h1>
+          <Typography component='h1' variant='h3'>
+            Products List
+          </Typography>
         </header>
-        <div style = {{display:'flex', flexDirection:'row',flexWrap:'wrap' ,padding:5, width: "100%"}}>
+        <div style = {{display:'flex', flexDirection:'row',flexWrap:'wrap', justifyContent:'space-evenly', width: "100%"}}>
           {
             products.map((product) => {
               let name = product.name ? product.name : "-";
@@ -53,4 +56,4 @@ function App() {
   );
 }
 
-export default App;
+export default Products;
