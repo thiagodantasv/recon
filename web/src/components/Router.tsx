@@ -13,31 +13,23 @@ import {
     ListItem,
     ListItemText,
     Icon,
-    IconButton
+    IconButton,
+    Typography,
+    Divider
 } from '@material-ui/core';
 import MenuIcon  from '@material-ui/icons/Menu';
+
+import './../style/mainpage.css';
 import Products from './Products';
 import CreateProduct from './CreateProduct';
+import NotFound from './NotFound';
+
 
 
 function AppRouter(){
-    const menu = [
-        {
-            name:'Products',
-            description: 'Products List',
-            path: '/products',
-            component: Products
-        },
-        {
-            name:'Create a Product',
-            description: 'Create a new product',
-            path: '/createProducts',
-            component: CreateProduct
-        }
-    ];
-
-
+    
     const [displayVerticalMenu,setDisplayVerticalMenu] = useState(false);
+    
     const menuScreen = (
       <Router>
         <Switch>
@@ -49,114 +41,54 @@ function AppRouter(){
           </Route>
           <Route exact path="/">
             <div>Home Page</div>
+            <div>what is cool enough to put in a home page ? </div>
           </Route>
           <Route path="*">
-            <div>404</div>
+            <NotFound />
           </Route>
         </Switch>
-        <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => setDisplayVerticalMenu(true)}
-            edge="start"
-          >
-            <MenuIcon />
-        </IconButton>
-        <Drawer
-            anchor='left'
-            elevation={20}
-            open={displayVerticalMenu}
-            variant='persistent'
-            onClose={() => {setDisplayVerticalMenu(false)}}
-        >
-          <List>
-            <ListItem onClick = {() => setDisplayVerticalMenu(false)}>
-              <Link to="/">home</Link>
-            </ListItem>
-            <ListItem onClick = {() => setDisplayVerticalMenu(false)}>
-              <Link to="/products">Products</Link>
-            </ListItem>
-            <ListItem onClick = {() => setDisplayVerticalMenu(false)}>
-              <Link to="/createProduct">Create Product</Link>
-            </ListItem>
-          </List>
-        </Drawer>
       </Router>
     );
-
-    const verticalMenu = (
-        
-        <Drawer
-            anchor='left'
-            elevation={20}
-            open={displayVerticalMenu}
-            variant='temporary'
-            onClose={() => {setDisplayVerticalMenu(false)}}
-        >
-            <List>
-                <Router>
-                    <Switch>
-                        {
-                            menu.map((menuItem) => {
-                                return(
-                                    <ListItem
-                                        button
-                                        key={menuItem.name}
-                                    >
-                                        
-                                        <Link to={menuItem.path}>{menuItem.name}</Link>
-                                        <Route path={menuItem.path}>
-                                            {menuItem.component}
-                                        </Route>
-                                    </ListItem>
-                                );
-                            })
-                        }
-                    </Switch>
-                </Router>
-            </List>
-        </Drawer>
-    );
-    const test = (
-      <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">home</Link>
-            </li>
-            <li>
-              <Link to="/products">products</Link>
-            </li>
-            <li>
-              <Link to="/createProduct">Create a product</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/createProduct">
-            <div>create product</div>
-          </Route>
-          <Route path="/">
-            <div>bacana</div>
-          </Route>
-          <Route path="*">
-            <div>404</div>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-    );
-
-
     return(
-        <div>
-            <Button onClick={() => {setDisplayVerticalMenu(true)}}>Click here</Button>
-            <Button onClick={() => {setDisplayVerticalMenu(true)}}>butto twop</Button>
-            {menuScreen}
+        <div className = 'webapp'>
+          <header className = 'mainpage-header'>
+            <div id = 'mainpage-menuicon'>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => setDisplayVerticalMenu(true)}
+                edge="start"
+              >
+                <MenuIcon />
+              </IconButton>
+            </div>
+          </header>
+            <div>
+              <Drawer
+              anchor='left'
+              elevation={20}
+              open={displayVerticalMenu}
+              variant='temporary'
+              onClose={() => {setDisplayVerticalMenu(false)}}
+              >
+                <List>
+                  <ListItem onClick = {() => setDisplayVerticalMenu(false)}>
+                    <Button href = '/' className = 'menu-button'>Home</Button>
+                  </ListItem>
+                  <Divider variant = 'middle' />
+                  <ListItem onClick = {() => setDisplayVerticalMenu(false)}>
+                    <Button href = "/products" className = 'menu-button'>Products List</Button>
+                  </ListItem>
+                  <Divider variant = 'middle' />
+                  <ListItem onClick = {() => setDisplayVerticalMenu(false)}>
+                    <Button href = "/createProduct" className = 'menu-button'>Create a Product</Button>
+                  </ListItem>
+                </List>
+              </Drawer>
+            </div>
+            <div>
+              {menuScreen}
+            </div>
         </div>
     );
 }

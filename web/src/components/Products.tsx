@@ -32,7 +32,7 @@ function Products() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style = {{ width:'100%' }}>
       <Paper elevation={3}>
         <header className="App-header">
           <Typography component='h1' variant='h3'>
